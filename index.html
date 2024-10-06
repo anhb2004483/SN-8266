@@ -1,39 +1,54 @@
-<h2>Chỉnh sửa giá trị</h2>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đọc Dữ Liệu từ Firebase</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+    <h1>Đăng Nhập</h1>
+    <div id="login-container">
+        <input type="text" id="username" placeholder="Tên người dùng" required>
+        <input type="password" id="password" placeholder="Mật khẩu" required>
+        <button id="login-button">Đăng Nhập</button>
+        <div id="login-message"></div>
+    </div>
 
-<!-- Chỉnh sửa cho SN1 -->
-<div id="edit-sn1">
-    <h3>SN1</h3>
-    <label for="sn1-temp-threshold">Temp Threshold:</label>
-    <input type="number" id="sn1-temp-threshold" placeholder="Nhập giá trị mới">
-    
-    <label for="sn1-gas-threshold">Gas Threshold:</label>
-    <input type="number" id="sn1-gas-threshold" placeholder="Nhập giá trị mới">
-    
-    <label for="sn1-khancap">Khẩn Cấp:</label>
-    <select id="sn1-khancap">
-        <option value="true">True</option>
-        <option value="false">False</option>
-    </select>
-    
-    <button id="sn1-save-button">Lưu</button>
-</div>
+    <h1>Dữ Liệu từ Firebase</h1>
+    <table id="data-table" style="display: none;">
+        <thead>
+            <tr>
+                <th>Sensor</th>
+                <th>Object</th>
+                <th>Gas</th>
+                <th>Gas Threshold</th>
+                <th>Temp Threshold</th>
+                <th>Khẩn Cấp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- SN1 Row -->
+            <tr>
+                <td>SN1</td>
+                <td id="sn1-object-data">12</td>
+                <td id="sn1-gas-data">12</td>
+                <td id="sn1-gas-threshold-data">22</td>
+                <td id="sn1-temp-threshold-data">Loading...</td>
+                <td id="sn1-khancap-data">true</td>
+            </tr>
+        </tbody>
+    </table>
 
-<!-- Chỉnh sửa cho SN2 -->
-<div id="edit-sn2">
-    <h3>SN2</h3>
-    <label for="sn2-temp-threshold">Temp Threshold:</label>
-    <input type="number" id="sn2-temp-threshold" placeholder="Nhập giá trị mới">
-    
-    <label for="sn2-gas-threshold">Gas Threshold:</label>
-    <input type="number" id="sn2-gas-threshold" placeholder="Nhập giá trị mới">
-    
-    <label for="sn2-khancap">Khẩn Cấp:</label>
-    <select id="sn2-khancap">
-        <option value="true">True</option>
-        <option value="false">False</option>
-    </select>
-    
-    <button id="sn2-save-button">Lưu</button>
-</div>
+    <!-- Phần nhập và gửi biến b -->
+    <h2>Nhập và gửi giá trị biến b:</h2>
+    <input type="text" id="b-value" placeholder="Nhập giá trị b">
+    <button id="submit-b">Gửi Lên Firebase</button>
 
-<!-- Tương tự cho SN3 và SN4 -->
+    <div id="submit-message"></div>
+</body>
+</html>
