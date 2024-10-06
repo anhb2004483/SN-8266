@@ -21,8 +21,8 @@ const database = getDatabase(app);
 // Đọc dữ liệu từ Firebase
 const dataContainer = document.getElementById('data-container');
 
-// Đường dẫn đến dữ liệu mà bạn muốn lấy
-const dataRef = ref(database, 'aaa');
+// Đường dẫn đến dữ liệu trong aaa/ccc
+const dataRef = ref(database, 'aaa/ccc');
 
 onValue(dataRef, (snapshot) => {
     const data = snapshot.val();
@@ -31,7 +31,7 @@ onValue(dataRef, (snapshot) => {
         // Hiển thị dữ liệu lên trang web
         dataContainer.innerHTML = `<p><strong>Dữ liệu:</strong> ${data}</p>`;
     } else {
-        dataContainer.innerHTML = `<p>Không có dữ liệu tại đường dẫn 'aaa'</p>`;
+        dataContainer.innerHTML = `<p>Không có dữ liệu tại đường dẫn 'aaa/ccc'</p>`;
     }
 }, (error) => {
     console.error("Lỗi khi đọc dữ liệu từ Firebase:", error);
