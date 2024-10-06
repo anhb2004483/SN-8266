@@ -1,20 +1,34 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiển Thị Dữ Liệu Firebase</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js"></script>
-</head>
-<body>
-    <h1>Dữ Liệu Từ Firebase</h1>
-    <div id="data-display">
-        <p><strong>Giá trị của aaa:</strong> <span id="aaa">Loading...</span></p>
-    </div>
+// Import các hàm từ Firebase SDK
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
 
-    <script src="script.js"></script>
-</body>
-</html>
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBI8Dfptxa5q3G6_GB1KfJZjWgU0lWEiDI",
+    authDomain: "espgas-d6120.firebaseapp.com",
+    databaseURL: "https://espgas-d6120-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "espgas-d6120",
+    storageBucket: "espgas-d6120.appspot.com",
+    messagingSenderId: "577421708651",
+    appId: "1:577421708651:web:cfc074f1ffb4761c45902e",
+    measurementId: "G-ZRRBCE50GS"
+};
+
+// Khởi tạo Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const database = getDatabase(app);
+
+// Hàm để lấy và hiển thị dữ liệu từ Firebase
+function getData() {
+    const aaaRef = ref(database, 'aaa');
+
+    onValue(aaaRef, (snapshot) => {
+        const data = snapshot.val();
+        document.getElementById('aaa').innerText = data !== null ? data : 'Không có dữ liệu';
+    });
+}
+
+// Gọi hàm để lấy dữ liệu
+getData();
