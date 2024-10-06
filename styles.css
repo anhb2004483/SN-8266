@@ -1,22 +1,17 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+    text-align: center;
+    background-color: #f0f0f0;
 }
 
 h1 {
     color: #333;
 }
 
-#data-display {
-    background: white;
-    padding: 15px;
-    border-radius: 5px;
+#data-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-p {
-    margin: 10px 0;
-    font-size: 18px;
 }
