@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Dữ Liệu Sensor</title>
+    <title>Đọc và Gửi Dữ Liệu từ Firebase</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="script.js"></script>
 </head>
@@ -84,5 +84,22 @@
             <div id="input-message"></div>
         </div>
     </div>
+    
+    <script>
+        document.getElementById('login-button').addEventListener('click', function() {
+            // Logic để xác thực thông tin đăng nhập
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Giả sử thông tin đăng nhập luôn đúng cho ví dụ này
+            if (username && password) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('data-container').style.display = 'block';
+                // Gọi hàm để tải dữ liệu từ Firebase (nếu cần)
+            } else {
+                document.getElementById('login-message').innerText = 'Tên người dùng hoặc mật khẩu không đúng.';
+            }
+        });
+    </script>
 </body>
 </html>
