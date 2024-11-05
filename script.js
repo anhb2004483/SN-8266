@@ -10,6 +10,7 @@ const firebaseConfig = {
     measurementId: "G-4QZ1WRMGW0"
 };
 
+
 // Khởi tạo Firebase
 firebase.initializeApp(firebaseConfig);
 
