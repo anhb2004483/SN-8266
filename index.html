@@ -1,27 +1,21 @@
-<div id="input-container">
-  <h2>Nhập dữ liệu cho các sensor</h2>
-  <table>
-    <tr>
-      <th>Sensor</th>
-      <th>Giá trị aaa</th>
-    </tr>
-    <tr>
-      <td>SN1</td>
-      <td><input type="text" id="input-sn1" placeholder="Nhập giá trị aaa cho SN1"></td>
-    </tr>
-    <tr>
-      <td>SN2</td>
-      <td><input type="text" id="input-sn2" placeholder="Nhập giá trị aaa cho SN2"></td>
-    </tr>
-    <tr>
-      <td>SN3</td>
-      <td><input type="text" id="input-sn3" placeholder="Nhập giá trị aaa cho SN3"></td>
-    </tr>
-    <tr>
-      <td>SN4</td>
-      <td><input type="text" id="input-sn4" placeholder="Nhập giá trị aaa cho SN4"></td>
-    </tr>
-  </table>
-  <button id="save-button">Lưu Dữ Liệu</button>
-  <p id="save-message"></p>
-</div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Gửi Dữ Liệu lên Firebase</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Nhập Dữ Liệu</h1>
+        <input type="text" id="inputBbb" placeholder="Nhập giá trị bbb">
+        <button id="submitBtn">Gửi Dữ Liệu</button>
+        <div id="message"></div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
