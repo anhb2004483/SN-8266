@@ -1,40 +1,53 @@
-body {
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+}
+
+#datetime {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #555;
 }
 
 h1 {
     color: #333;
 }
 
-#login-container {
+#login-container, #input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
 }
 
-input {
-    display: block;
-    margin: 10px 0;
+input, select, button {
     padding: 8px;
-    width: 200px; /* Chiều rộng cho ô nhập liệu trong phần đăng nhập */
+    margin: 10px 0;
+    width: 100%;
+    max-width: 300px;
 }
 
 button {
-    padding: 10px 15px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
 }
 
-#login-message {
-    margin-top: 10px;
-}
-
 #login-message.success {
     color: green;
 }
 
-#login-message.error {
+#login-message.error, #input-message.error {
     color: red;
 }
 
@@ -53,19 +66,4 @@ button {
 #data-table th {
     background-color: #4CAF50;
     color: white;
-}
-
-#input-container {
-    display: flex;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    gap: 10px; /* Khoảng cách giữa các phần tử */
-}
-
-select, input, button {
-    padding: 8px;
-    margin: 0; /* Loại bỏ margin để các phần tử căn đều */
-}
-
-input {
-    width: 150px; /* Chiều rộng cố định cho các ô nhập liệu */
 }
