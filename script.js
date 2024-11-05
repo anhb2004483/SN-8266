@@ -99,14 +99,13 @@ loginButton.addEventListener('click', () => {
         const userData = snapshot.val();
 
         if (userData) {
-            const dbUsername = userData.name;
+            const dbUsername = userData.username;
             const dbPassword = userData.password;
 
             if (username === dbUsername && password === dbPassword) {
                 loginMessage.textContent = 'Đăng nhập thành công!';
                 document.getElementById('login-container').style.display = 'none'; // Ẩn phần đăng nhập
-                document.getElementById('data-table').style.display = 'table'; // Hiện bảng dữ liệu
-                document.getElementById('input-container').style.display = 'block'; // Hiện phần nhập dữ liệu
+                document.getElementById('data-container').style.display = 'block'; // Hiện bảng dữ liệu và nhập dữ liệu
             } else {
                 loginMessage.textContent = 'Tên người dùng hoặc mật khẩu không chính xác.';
             }
