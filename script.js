@@ -153,37 +153,47 @@ sendButton.addEventListener('click', () => {
     const gasThresholdValue = Number(document.getElementById('gas-threshold-input').value);
     const tempThresholdValue = Number(document.getElementById('temp-threshold-input').value);
 
-    if (isNaN(gasThresholdValue) || isNaN(tempThresholdValue)) {
-        inputMessage.textContent = 'Vui lòng nhập các giá trị số hợp lệ!';
+    // Kiểm tra nếu các giá trị nhập vào là số hợp lệ
+    if (isNaN(gasThresholdValue) && isNaN(tempThresholdValue)) {
+        inputMessage.textContent = 'Vui lòng nhập ít nhất một giá trị hợp lệ!';
         inputMessage.classList.add('error');
         inputMessage.classList.remove('success');
         return;
     }
 
-    const gasThresholdRef = ref(database, `${selectedSensor}/Gas_threshold`);
-    const tempThresholdRef = ref(database, `${selectedSensor}/Temp_threshold`);
+    // Cập nhật Firebase chỉ khi giá trị hợp lệ
+    const updates = {};
 
-    Promise.all([
-        set(gasThresholdRef, gasThresholdValue),
-        set(tempThresholdRef, tempThresholdValue)
-    ])
-    .then(() => {
-        inputMessage.textContent = 'Giá trị đã được gửi thành công!';
-        inputMessage.classList.add('success');
-        inputMessage.classList.remove('error');
+    if (!isNaN(gasThresholdValue)) {
+        updates[`${selectedSensor}/Gas_threshold`] = gasThresholdValue;
+    }
 
-        document.getElementById('gas-threshold-input').value = '';
-        document.getElementById('temp-threshold-input').value = '';
+    if (!isNaN(tempThresholdValue)) {
+        updates[`${selectedSensor}/Temp_threshold`] = tempThresholdValue;
+    }
 
-        setTimeout(() => {
-            inputMessage.textContent = '';
-            inputMessage.classList.remove('success');
-        }, 2000);
-    })
-    .catch((error) => {
-        console.error("Lỗi khi gửi dữ liệu:", error);
-        inputMessage.textContent = 'Đã xảy ra lỗi khi gửi dữ liệu: ' + error.message;
-        inputMessage.classList.add('error');
-        inputMessage.classList.remove('success');
-    });
+    // Gửi các giá trị đã cập nhật
+    if (Object.keys(updates).length > 0) {
+        set(ref(database), updates)
+            .then(() => {
+                inputMessage.textContent = 'Giá trị đã được gửi thành công!';
+                inputMessage.classList.add('success');
+                inputMessage.classList.remove('error');
+
+                // Làm sạch các input sau khi gửi
+                document.getElementById('gas-threshold-input').value = '';
+                document.getElementById('temp-threshold-input').value = '';
+
+                setTimeout(() => {
+                    inputMessage.textContent = '';
+                    inputMessage.classList.remove('success');
+                }, 2000);
+            })
+            .catch((error) => {
+                console.error("Lỗi khi gửi dữ liệu:", error);
+                inputMessage.textContent = 'Đã xảy ra lỗi khi gửi dữ liệu: ' + error.message;
+                inputMessage.classList.add('error');
+                inputMessage.classList.remove('success');
+            });
+    }
 });
