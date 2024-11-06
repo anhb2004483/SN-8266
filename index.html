@@ -1,86 +1,66 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đọc và Gửi Dữ Liệu từ Firebase</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="module" src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Dữ Liệu Sensor</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Đăng Nhập</h1>
-    <div id="login-container">
-        <input type="text" id="username" placeholder="Tên người dùng" required>
-        <input type="password" id="password" placeholder="Mật khẩu" required>
-        <button id="login-button">Đăng Nhập</button>
-        <div id="login-message"></div>
+  <!-- Phần đăng nhập -->
+  <div id="login-container">
+    <h2>Đăng nhập</h2>
+    <input type="text" id="username" placeholder="Tên người dùng" required>
+    <input type="password" id="password" placeholder="Mật khẩu" required>
+    <button id="login-button">Đăng nhập</button>
+    <p id="login-message"></p>
+  </div>
+
+  <!-- Phần hiển thị dữ liệu sensor -->
+  <div id="data-container" style="display: none;">
+    <h2>Dữ liệu Sensor</h2>
+    
+    <!-- Chọn sensor -->
+    <label for="sensor-select">Chọn sensor:</label>
+    <select id="sensor-select">
+      <option value="SN1">SN1</option>
+      <option value="SN2">SN2</option>
+      <option value="SN3">SN3</option>
+      <option value="SN4">SN4</option>
+    </select>
+
+    <div class="sensor-data">
+      <h3>Thông tin Sensor</h3>
+      <div id="sn1-object-data">Sensor 1 Object Data: </div>
+      <div id="sn1-gas-data">Sensor 1 Gas Data: </div>
+      <div id="sn1-gas-threshold-data">Sensor 1 Gas Threshold: </div>
+      <div id="sn1-temp-threshold-data">Sensor 1 Temp Threshold: </div>
+      <div id="sn1-khancap-data">Sensor 1 Khẩn cấp: </div>
+      <!-- Các sensor khác sẽ có cấu trúc tương tự -->
     </div>
 
-    <div id="data-container" style="display: none;">
-        <h1>Dữ Liệu từ Firebase</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Sensor</th>
-                    <th>Object</th>
-                    <th>Gas</th>
-                    <th>Gas Threshold</th>
-                    <th>Temp Threshold</th>
-                    <th>Khẩn cấp</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>SN1</td>
-                    <td id="sn1-object-data">N/A</td>
-                    <td id="sn1-gas-data">N/A</td>
-                    <td id="sn1-gas-threshold-data">N/A</td>
-                    <td id="sn1-temp-threshold-data">N/A</td>
-                    <td id="sn1-khancap-data">N/A</td>
-                </tr>
-                <tr>
-                    <td>SN2</td>
-                    <td id="sn2-object-data">N/A</td>
-                    <td id="sn2-gas-data">N/A</td>
-                    <td id="sn2-gas-threshold-data">N/A</td>
-                    <td id="sn2-temp-threshold-data">N/A</td>
-                    <td id="sn2-khancap-data">N/A</td>
-                </tr>
-                <tr>
-                    <td>SN3</td>
-                    <td id="sn3-object-data">N/A</td>
-                    <td id="sn3-gas-data">N/A</td>
-                    <td id="sn3-gas-threshold-data">N/A</td>
-                    <td id="sn3-temp-threshold-data">N/A</td>
-                    <td id="sn3-khancap-data">N/A</td>
-                </tr>
-                <tr>
-                    <td>SN4</td>
-                    <td id="sn4-object-data">N/A</td>
-                    <td id="sn4-gas-data">N/A</td>
-                    <td id="sn4-gas-threshold-data">N/A</td>
-                    <td id="sn4-temp-threshold-data">N/A</td>
-                    <td id="sn4-khancap-data">N/A</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>Cập Nhật Ngưỡng</h2>
-        <label for="sensor-select">Chọn Sensor:</label>
-        <select id="sensor-select">
-            <option value="SN1">SN1</option>
-            <option value="SN2">SN2</option>
-            <option value="SN3">SN3</option>
-            <option value="SN4">SN4</option>
-        </select>
-        
-        <input type="number" id="gas-threshold-input" placeholder="Gas Threshold">
-        <input type="number" id="temp-threshold-input" placeholder="Temp Threshold">
-        
-        <button id="send-button">Gửi</button>
-        <button id="khancap-toggle">Nhấn để Bật Khẩn Cấp</button>      
-        <div id="input-message"></div>
-
+    <!-- Cài đặt ngưỡng gas và nhiệt độ -->
+    <div>
+      <label for="gas-threshold-input">Ngưỡng Gas:</label>
+      <input type="number" id="gas-threshold-input" placeholder="Nhập giá trị ngưỡng gas">
     </div>
+    
+    <div>
+      <label for="temp-threshold-input">Ngưỡng Nhiệt độ:</label>
+      <input type="number" id="temp-threshold-input" placeholder="Nhập giá trị ngưỡng nhiệt độ">
+    </div>
+
+    <!-- Nút gửi giá trị -->
+    <button id="send-button">Gửi</button>
+    <p id="input-message"></p>
+
+    <!-- Khẩn cấp -->
+    <button id="khancap-toggle">Nhấn để Bật Khẩn Cấp</button>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
