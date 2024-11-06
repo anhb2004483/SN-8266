@@ -54,19 +54,19 @@ const snRefs = {
 
 // Hàm lấy và hiển thị dữ liệu cho từng sensor
 const fetchDataForSensor = (sensorKey, refs) => {
-  onValue(ref(database, `${sensorKey}/object`), (snapshot) => {
+  onValue(ref(database, ${sensorKey}/object), (snapshot) => {
     refs.object.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, `${sensorKey}/gas`), (snapshot) => {
+  onValue(ref(database, ${sensorKey}/gas), (snapshot) => {
     refs.gas.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, `${sensorKey}/Gas_threshold`), (snapshot) => {
+  onValue(ref(database, ${sensorKey}/Gas_threshold), (snapshot) => {
     refs.gasThreshold.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, `${sensorKey}/Temp_threshold`), (snapshot) => {
+  onValue(ref(database, ${sensorKey}/Temp_threshold), (snapshot) => {
     refs.tempThreshold.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, `${sensorKey}/khancap`), (snapshot) => {
+  onValue(ref(database, ${sensorKey}/khancap), (snapshot) => {
     if (snapshot.exists()) {
       const khancapValue = snapshot.val();
       refs.khancap.textContent = (khancapValue === -1) ? 'OFF' : (khancapValue === -2) ? 'ON' : khancapValue;
@@ -126,11 +126,11 @@ const sensorSelect = document.getElementById('sensor-select');
 // Hàm gửi trạng thái khẩn cấp lên Firebase
 const sendKhancapStatus = () => {
     const selectedSensor = sensorSelect.value;
-    const khancapRef = ref(database, `${selectedSensor}/khancap`);
+    const khancapRef = ref(database, ${selectedSensor}/khancap);
     
     set(khancapRef, khancapState)
         .then(() => {
-            console.log(`Trạng thái khẩn cấp đã được gửi cho ${selectedSensor}: ${khancapState}`);
+            console.log(Trạng thái khẩn cấp đã được gửi cho ${selectedSensor}: ${khancapState});
         })
         .catch((error) => {
             console.error("Lỗi khi gửi trạng thái khẩn cấp:", error);
@@ -153,47 +153,37 @@ sendButton.addEventListener('click', () => {
     const gasThresholdValue = Number(document.getElementById('gas-threshold-input').value);
     const tempThresholdValue = Number(document.getElementById('temp-threshold-input').value);
 
-    // Kiểm tra nếu các giá trị nhập vào là số hợp lệ
-    if (isNaN(gasThresholdValue) && isNaN(tempThresholdValue)) {
-        inputMessage.textContent = 'Vui lòng nhập ít nhất một giá trị hợp lệ!';
+    if (isNaN(gasThresholdValue) || isNaN(tempThresholdValue)) {
+        inputMessage.textContent = 'Vui lòng nhập các giá trị số hợp lệ!';
         inputMessage.classList.add('error');
         inputMessage.classList.remove('success');
         return;
     }
 
-    // Cập nhật Firebase chỉ khi giá trị hợp lệ
-    const updates = {};
+    const gasThresholdRef = ref(database, ${selectedSensor}/Gas_threshold);
+    const tempThresholdRef = ref(database, ${selectedSensor}/Temp_threshold);
 
-    if (!isNaN(gasThresholdValue)) {
-        updates[`${selectedSensor}/Gas_threshold`] = gasThresholdValue;
-    }
+    Promise.all([
+        set(gasThresholdRef, gasThresholdValue),
+        set(tempThresholdRef, tempThresholdValue)
+    ])
+    .then(() => {
+        inputMessage.textContent = 'Giá trị đã được gửi thành công!';
+        inputMessage.classList.add('success');
+        inputMessage.classList.remove('error');
 
-    if (!isNaN(tempThresholdValue)) {
-        updates[`${selectedSensor}/Temp_threshold`] = tempThresholdValue;
-    }
+        document.getElementById('gas-threshold-input').value = '';
+        document.getElementById('temp-threshold-input').value = '';
 
-    // Gửi các giá trị đã cập nhật
-    if (Object.keys(updates).length > 0) {
-        set(ref(database), updates)
-            .then(() => {
-                inputMessage.textContent = 'Giá trị đã được gửi thành công!';
-                inputMessage.classList.add('success');
-                inputMessage.classList.remove('error');
-
-                // Làm sạch các input sau khi gửi
-                document.getElementById('gas-threshold-input').value = '';
-                document.getElementById('temp-threshold-input').value = '';
-
-                setTimeout(() => {
-                    inputMessage.textContent = '';
-                    inputMessage.classList.remove('success');
-                }, 2000);
-            })
-            .catch((error) => {
-                console.error("Lỗi khi gửi dữ liệu:", error);
-                inputMessage.textContent = 'Đã xảy ra lỗi khi gửi dữ liệu: ' + error.message;
-                inputMessage.classList.add('error');
-                inputMessage.classList.remove('success');
-            });
-    }
+        setTimeout(() => {
+            inputMessage.textContent = '';
+            inputMessage.classList.remove('success');
+        }, 2000);
+    })
+    .catch((error) => {
+        console.error("Lỗi khi gửi dữ liệu:", error);
+        inputMessage.textContent = 'Đã xảy ra lỗi khi gửi dữ liệu: ' + error.message;
+        inputMessage.classList.add('error');
+        inputMessage.classList.remove('success');
+    });
 });
