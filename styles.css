@@ -1,3 +1,28 @@
+/* Căn giữa toàn bộ trang */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Đảm bảo các phần tử con của body (dữ liệu và đăng nhập) được căn giữa */
+#login-container, #data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px 0;
+}
 /* Căn giữa bảng dữ liệu */
 #table-container {
     display: flex;
