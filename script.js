@@ -1,3 +1,4 @@
+
 // Import các hàm cần thiết từ SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
@@ -54,19 +55,19 @@ const snRefs = {
 
 // Hàm lấy và hiển thị dữ liệu cho từng sensor
 const fetchDataForSensor = (sensorKey, refs) => {
-  onValue(ref(database, ${sensorKey}/object), (snapshot) => {
+  onValue(ref(database, `${sensorKey}/object`), (snapshot) => {
     refs.object.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, ${sensorKey}/gas), (snapshot) => {
+  onValue(ref(database, `${sensorKey}/gas`), (snapshot) => {
     refs.gas.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, ${sensorKey}/Gas_threshold), (snapshot) => {
+  onValue(ref(database, `${sensorKey}/Gas_threshold`), (snapshot) => {
     refs.gasThreshold.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, ${sensorKey}/Temp_threshold), (snapshot) => {
+  onValue(ref(database, `${sensorKey}/Temp_threshold`), (snapshot) => {
     refs.tempThreshold.textContent = snapshot.val() || 'N/A';
   });
-  onValue(ref(database, ${sensorKey}/khancap), (snapshot) => {
+  onValue(ref(database, `${sensorKey}/khancap`), (snapshot) => {
     if (snapshot.exists()) {
       const khancapValue = snapshot.val();
       refs.khancap.textContent = (khancapValue === -1) ? 'OFF' : (khancapValue === -2) ? 'ON' : khancapValue;
@@ -79,41 +80,41 @@ const fetchDataForSensor = (sensorKey, refs) => {
 // Gọi hàm lấy dữ liệu cho từng sensor
 Object.keys(snRefs).forEach(sensorKey => fetchDataForSensor(sensorKey, snRefs[sensorKey]));
 
-// Xử lý đăng nhập
+// Đăng nhập
 const loginButton = document.getElementById('login-button');
 const loginMessage = document.getElementById('login-message');
 
 loginButton.addEventListener('click', () => {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
 
-    const userRef = ref(database, 'user');
+  const userRef = ref(database, 'user');
 
-    onValue(userRef, (snapshot) => {
-        const userData = snapshot.val();
+  onValue(userRef, (snapshot) => {
+    const userData = snapshot.val();
 
-        if (userData) {
-            const dbUsername = userData.name;
-            const dbPassword = userData.password;
+    if (userData) {
+      const dbUsername = userData.name;
+      const dbPassword = userData.password;
 
-            if (username === dbUsername && password === dbPassword) {
-                loginMessage.textContent = 'Đăng nhập thành công!';
-                loginMessage.classList.add('success');
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('data-container').style.display = 'block';
-            } else {
-                loginMessage.textContent = 'Tên người dùng hoặc mật khẩu không đúng!';
-                loginMessage.classList.add('error');
-            }
-        } else {
-            loginMessage.textContent = 'Không tìm thấy dữ liệu người dùng!';
-            loginMessage.classList.add('error');
-        }
-    }, (error) => {
-        console.error("Lỗi khi đọc dữ liệu người dùng:", error);
-        loginMessage.textContent = 'Đã xảy ra lỗi khi lấy dữ liệu người dùng: ' + error.message;
+      if (username === dbUsername && password === dbPassword) {
+        loginMessage.textContent = 'Đăng nhập thành công!';
+        loginMessage.classList.add('success');
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('data-container').style.display = 'block'; // Hiện bảng dữ liệu
+      } else {
+        loginMessage.textContent = 'Tên người dùng hoặc mật khẩu không đúng!';
         loginMessage.classList.add('error');
-    });
+      }
+    } else {
+      loginMessage.textContent = 'Không tìm thấy dữ liệu người dùng!';
+      loginMessage.classList.add('error');
+    }
+  }, (error) => {
+    console.error("Lỗi khi đọc dữ liệu người dùng:", error);
+    loginMessage.textContent = 'Đã xảy ra lỗi khi lấy dữ liệu người dùng: ' + error.message;
+    loginMessage.classList.add('error');
+  });
 });
 
 // Biến để theo dõi trạng thái khẩn cấp
@@ -126,11 +127,11 @@ const sensorSelect = document.getElementById('sensor-select');
 // Hàm gửi trạng thái khẩn cấp lên Firebase
 const sendKhancapStatus = () => {
     const selectedSensor = sensorSelect.value;
-    const khancapRef = ref(database, ${selectedSensor}/khancap);
+    const khancapRef = ref(database, `${selectedSensor}/khancap`);
     
     set(khancapRef, khancapState)
         .then(() => {
-            console.log(Trạng thái khẩn cấp đã được gửi cho ${selectedSensor}: ${khancapState});
+            console.log(`Trạng thái khẩn cấp đã được gửi cho ${selectedSensor}: ${khancapState}`);
         })
         .catch((error) => {
             console.error("Lỗi khi gửi trạng thái khẩn cấp:", error);
@@ -160,8 +161,8 @@ sendButton.addEventListener('click', () => {
         return;
     }
 
-    const gasThresholdRef = ref(database, ${selectedSensor}/Gas_threshold);
-    const tempThresholdRef = ref(database, ${selectedSensor}/Temp_threshold);
+    const gasThresholdRef = ref(database, `${selectedSensor}/Gas_threshold`);
+    const tempThresholdRef = ref(database, `${selectedSensor}/Temp_threshold`);
 
     Promise.all([
         set(gasThresholdRef, gasThresholdValue),
