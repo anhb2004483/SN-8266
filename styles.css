@@ -1,51 +1,126 @@
+/* Thiết lập kiểu dáng cơ bản */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-    color: #333;
+    color: #444;
 }
 
-#login-container {
-    margin-bottom: 20px;
+table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-input {
-    display: block;
-    margin: 10px 0;
-    padding: 8px;
-    width: 200px;
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
-button {
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    font-size: 14px;
+}
+
+/* Định dạng phần đăng nhập */
+#login-container, #data-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+#login-container input, #data-container input, #data-container select {
+    width: calc(100% - 22px);
     padding: 10px;
-    background-color: #007bff;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#login-button, #send-button, #khancap-toggle {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
     color: white;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    margin: 10px 0;
 }
 
-button:hover {
-    background-color: #0056b3;
+#login-button:hover, #send-button:hover, #khancap-toggle:hover {
+    background-color: #45a049;
 }
 
-#data-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#data-table th, #data-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#data-table th {
-    background-color: #007bff;
-    color: white;
-}
-
-#login-message {
-    color: red;
+#login-message, #input-message {
+    text-align: center;
     margin-top: 10px;
+    font-size: 14px;
+}
+
+#login-message.success, #input-message.success {
+    color: #4CAF50;
+}
+
+#login-message.error, #input-message.error {
+    color: #f44336;
+}
+
+/* Định dạng phần cập nhật ngưỡng */
+#data-container h2 {
+    color: #444;
+    margin-top: 20px;
+}
+
+#data-container label {
+    display: inline-block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+#sensor-select {
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Định dạng nút khẩn cấp */
+#khancap-toggle {
+    background-color: #FF5722;
+}
+
+#khancap-toggle.on {
+    background-color: #FF5722;
+}
+
+#khancap-toggle.off {
+    background-color: #4CAF50;
 }
