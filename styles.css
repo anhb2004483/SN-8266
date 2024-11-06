@@ -16,6 +16,22 @@ h1 {
     color: #444;
 }
 
+/* Định dạng tiêu đề ở giữa */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+header h2 {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
 table {
     width: 100%;
     max-width: 600px;
@@ -123,4 +139,19 @@ td {
 
 #khancap-toggle.off {
     background-color: #4CAF50;
+}
+
+/* Căn chỉnh các phần tử của phần cập nhật ngưỡng và nút khẩn cấp */
+#input-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#input-container select,
+#input-container input,
+#input-container button {
+    flex: 1;
+    margin-top: 8px;
 }
