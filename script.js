@@ -239,6 +239,7 @@ sendButton.addEventListener('click', () => {
 
 
 
+
 /const gmailContainer = document.getElementById('gmail-container');
 const gmailMessage = document.getElementById('gmail-message');
 
