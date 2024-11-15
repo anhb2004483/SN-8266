@@ -86,26 +86,21 @@
         
 <h2>Cập Nhật Gmail</h2>
 <div id="gmail-container">
-  <div class="gmail-entry">
-    <input id="gmail-user1" type="email" placeholder="Nhập Gmail của User 1">
-    <button class="gmail-send-button" data-user="user1">Gửi</button>
+  <select id="user-select">
+    <option value="user1">User 1</option>
+    <option value="user2">User 2</option>
+    <option value="user3">User 3</option>
+    <option value="user4">User 4</option>
+  </select>
+  
+  <div id="gmail-entry-container">
+    <input id="gmail-input" type="email" placeholder="Nhập Gmail">
+    <button id="gmail-send-button">Gửi</button>
   </div>
-  <div class="gmail-entry">
-    <input id="gmail-user2" type="email" placeholder="Nhập Gmail của User 2">
-    <button class="gmail-send-button" data-user="user2">Gửi</button>
-  </div>
-    <div id="gmail-container">
-  <div class="gmail-entry">
-    <input id="gmail-user3" type="email" placeholder="Nhập Gmail của User 3">
-    <button class="gmail-send-button" data-user="user3">Gửi</button>
-  </div>
-        <div id="gmail-container">
-  <div class="gmail-entry">
-    <input id="gmail-user4" type="email" placeholder="Nhập Gmail của User 4">
-    <button class="gmail-send-button" data-user="user4">Gửi</button>
-  </div>
+  
   <div id="gmail-message" class="message"></div>
 </div>
+
 
 
 
