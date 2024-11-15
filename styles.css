@@ -1,0 +1,189 @@
+/* Thiết lập kiểu dáng cơ bản */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #444;
+}
+.center-title {
+    font-size: 28px; /* Kích thước chữ lớn hơn */
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.center-subtitle {
+    font-size: 24px; /* Kích thước chữ lớn hơn */
+    text-align: center;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+
+
+
+table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    font-size: 14px;
+}
+
+#login-container, #data-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+#login-container input, #data-container input, #data-container select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#login-button, #send-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+#login-button:hover, #send-button:hover {
+    background-color: #45a049;
+}
+
+#login-message, #input-message {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#login-message.success, #input-message.success {
+    color: #4CAF50;
+}
+
+#login-message.error, #input-message.error {
+    color: #f44336;
+}
+
+/* Định dạng phần cập nhật ngưỡng */
+#data-container h2 {
+    color: #444;
+    margin-top: 20px;
+}
+
+#threshold-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+#threshold-container select,
+#threshold-container input,
+#khancap-toggle {
+    flex: 1;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#khancap-toggle {
+    background-color: #FF5722;
+    color: white;
+    cursor: pointer;
+}
+
+#khancap-toggle.on {
+    background-color: #FF5722;
+}
+
+#khancap-toggle.off {
+    background-color: #4CAF50;
+}
+
+#send-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+#gmail-container {
+    margin-top: 20px;
+}
+
+/* Đảm bảo nút gửi và ô nhập Gmail nằm cùng hàng */
+.gmail-entry {
+    display: flex;
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    margin-bottom: 10px; /* Khoảng cách giữa các dòng */
+}
+
+.gmail-entry input {
+    margin-right: 10px; /* Khoảng cách giữa ô nhập và nút gửi */
+    padding: 5px;
+    font-size: 14px;
+    width: 200px; /* Đặt chiều rộng ô nhập */
+}
+
+.gmail-entry button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+#gmail-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: red;
+}
