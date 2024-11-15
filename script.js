@@ -240,6 +240,7 @@ sendButton.addEventListener('click', () => {
 
 
 // Hàm gửi Gmail lên Firebase
+// Hàm gửi Gmail lên Firebase
 const sendGmailToFirebase = (userKey, emailValue) => {
     const userRef = ref(database, `user/${userKey}`);
     set(userRef, emailValue)
@@ -250,8 +251,7 @@ const sendGmailToFirebase = (userKey, emailValue) => {
             gmailMessage.classList.remove('error');
 
             // Reset ô nhập Gmail
-            const emailInputId = `gmail-${userKey}`;
-            document.getElementById(emailInputId).value = '';
+            document.getElementById('gmail-input').value = '';
 
             // Ẩn thông báo sau 2 giây
             setTimeout(() => {
@@ -274,26 +274,21 @@ const sendGmailToFirebase = (userKey, emailValue) => {
 };
 
 // Xử lý sự kiện nhấn nút "Gửi" Gmail
-const gmailContainer = document.getElementById('gmail-container');
-const gmailMessage = document.getElementById('gmail-message');
+document.getElementById('gmail-send-button').addEventListener('click', () => {
+    const userSelect = document.getElementById('user-select');
+    const selectedUser = userSelect.value;
+    const emailValue = document.getElementById('gmail-input').value;
 
-gmailContainer.addEventListener('click', (event) => {
-    if (event.target.classList.contains('gmail-send-button')) {
-        const userKey = event.target.getAttribute('data-user');
-        const emailInputId = `gmail-${userKey}`;
-        const emailValue = document.getElementById(emailInputId).value;
-
-        if (!emailValue || !emailValue.includes('@')) {
-            gmailMessage.textContent = 'Vui lòng nhập địa chỉ Gmail hợp lệ!';
-            gmailMessage.classList.add('error');
-            gmailMessage.classList.remove('success');
-            return;
-        }
-
-        console.log(`Đang gửi Gmail: ${emailValue} cho user: ${userKey}`); // Log thông tin
-
-        sendGmailToFirebase(userKey, emailValue);
+    if (!emailValue || !emailValue.includes('@')) {
+        gmailMessage.textContent = 'Vui lòng nhập địa chỉ Gmail hợp lệ!';
+        gmailMessage.classList.add('error');
+        gmailMessage.classList.remove('success');
+        return;
     }
+
+    console.log(`Đang gửi Gmail: ${emailValue} cho ${selectedUser}`); // Log thông tin
+
+    sendGmailToFirebase(selectedUser, emailValue);
 });
 
 
