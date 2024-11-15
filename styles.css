@@ -158,28 +158,26 @@ td {
 
 
 #gmail-container {
-    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Đảm bảo nút gửi và ô nhập Gmail nằm cùng hàng */
 .gmail-entry {
     display: flex;
-    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-    margin-bottom: 10px; /* Khoảng cách giữa các dòng */
+    gap: 10px;
+    align-items: center;
 }
 
-.gmail-entry input {
-    margin-right: 10px; /* Khoảng cách giữa ô nhập và nút gửi */
-    padding: 5px;
-    font-size: 14px;
-    width: 200px; /* Đặt chiều rộng ô nhập */
+#gmail-input {
+    width: 200px;
 }
 
-.gmail-entry button {
+#gmail-send-button {
     padding: 5px 10px;
-    font-size: 14px;
     cursor: pointer;
 }
+
 
 
 #gmail-message {
