@@ -1,3 +1,26 @@
+// Hàm để cập nhật thời gian hiện tại
+const updateCurrentTime = () => {
+    const currentTimeElement = document.getElementById('current-time');
+    const now = new Date();
+    const day = now.getDate();
+    const month = now.getMonth() + 1; // Lấy tháng, nhưng cần cộng thêm 1 vì tháng bắt đầu từ 0
+    const year = now.getFullYear();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    // Định dạng thời gian (DD/MM/YYYY HH:MM:SS)
+    const formattedTime = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    currentTimeElement.textContent = `Thời gian hiện tại: ${formattedTime}`;
+};
+
+// Cập nhật thời gian mỗi giây
+setInterval(updateCurrentTime, 1000);
+
+// Gọi hàm để hiển thị thời gian ngay khi trang được tải
+updateCurrentTime();
+
+
 // Import các hàm cần thiết từ SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
