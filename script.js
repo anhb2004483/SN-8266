@@ -237,10 +237,7 @@ sendButton.addEventListener('click', () => {
     });
 });
 
-
-
-
-/const gmailContainer = document.getElementById('gmail-container');
+const gmailContainer = document.getElementById('gmail-container');
 const gmailMessage = document.getElementById('gmail-message');
 
 gmailContainer.addEventListener('click', (event) => {
@@ -294,4 +291,3 @@ const sendGmailToFirebase = (userKey, emailValue) => {
             }, 2000);
         });
 };
-
