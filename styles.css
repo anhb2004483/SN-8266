@@ -180,8 +180,8 @@ td {
 
 
 
-#gmail-message {
-    margin-top: 10px;
+.message {
+  margin-top: 10px;
     font-size: 14px;
     color: red;
 }
